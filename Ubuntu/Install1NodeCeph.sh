@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 sudo apt -y update
-sudo apt -y install lspci git lvm2 virt-what pciutils python3-pip python3-virtualenv exit
+sudo apt -y install pciutils virt-what git lvm2 virt-what pciutils python3-pip python3-virtualenv exit
 git clone https://github.com/ceph/ceph-deploy
 cdir=$(pwd)
 cd ceph-deploy
