@@ -13,4 +13,6 @@
 
 
 ## Ubuntu 20+
+Copy/paste below
+
 ```git clone https://github.com/radonm/ceph-scripts;./ceph-scripts/Ubuntu/Install1NodeCeph.sh```
