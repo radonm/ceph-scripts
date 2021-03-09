@@ -50,7 +50,7 @@ sudo /bin/cp ceph.client.admin.keyring /etc/ceph/
 sudo ceph-deploy --overwrite-conf mgr create `hostname -s`
 sudo ceph-deploy --overwrite-conf mds create `hostname -s`
 sudo ceph-deploy --overwrite-conf rgw create `hostname -s`
-sudo ceph-deploy --overwrite-conf osd create --data /dev/$dev `hostname -s`
+sudo ceph-deploy --overwrite-conf osd create --data /dev/$dev --dmcrypt `hostname -s`
 sudo ceph mgr module enable dashboard
 sudo ceph dashboard set-login-credentials ceph ceph &> /dev/null
 sudo ceph dashboard create-self-signed-cert  &> /dev/null
