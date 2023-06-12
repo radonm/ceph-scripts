@@ -12,6 +12,7 @@ dev=sdb
 sudo virt-what | grep xen &> /dev/null && dev=xvdb
 sudo lspci | grep 'Elastic Network Adapter' &> /dev/null && dev=nvme1n1
 sudo lspci | grep 'Virtio SCSI' &> /dev/null && dev=sdb
+dmidecode | grep -qi linode && dev=sdc
 sudo ls -l /dev/$dev &> /dev/null || echo No device $dev, read requirements, fix and then try again
 sudo ls -l /dev/$dev &> /dev/null || exit
 sudo fdisk -l /dev/$dev|grep -iv disk|grep /dev/$dev &> /dev/null && echo Device $dev not empty, fix and try again
@@ -61,7 +62,7 @@ acckey=$(sudo radosgw-admin user info --uid=sysadmin | grep access_key|cut -d '"
 seckey=$(sudo radosgw-admin user info --uid=sysadmin | grep secret_key|cut -d '"' -f 4)
 sudo ceph dashboard set-rgw-api-access-key $acckey &>/dev/null
 sudo ceph dashboard set-rgw-api-secret-key $seckey &>/dev/null
-sudo ceph osd pool create bmi 16
+sudo ceph osd pool create rbd 16
 sudo ceph osd pool create cephfs 16
 sudo ceph osd pool create cephfsmeta 8
 sleep 3
@@ -69,6 +70,7 @@ sudo ceph osd pool application enable bmi rbd
 sudo ceph osd pool application enable cephfs cephfs
 sudo ceph osd pool application enable cephfsmeta cephfs
 sudo ceph fs new cephfs cephfsmeta cephfs
+ceph config set mon auth_allow_insecure_global_id_reclaim false
 sleep 5
 clear
 sudo ceph -s
