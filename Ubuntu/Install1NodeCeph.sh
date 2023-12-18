@@ -66,7 +66,7 @@ sudo ceph osd pool create rbd 16
 sudo ceph osd pool create cephfs 16
 sudo ceph osd pool create cephfsmeta 8
 sleep 3
-sudo ceph osd pool application enable bmi rbd
+sudo ceph osd pool application enable rbd rbd
 sudo ceph osd pool application enable cephfs cephfs
 sudo ceph osd pool application enable cephfsmeta cephfs
 sudo ceph fs new cephfs cephfsmeta cephfs
